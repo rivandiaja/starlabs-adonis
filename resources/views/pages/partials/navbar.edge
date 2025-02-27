@@ -1,0 +1,135 @@
+<!-- Navbar -->
+<nav class="bg-gradient-to-r from-[#04122e] to-[#120c2b] shadow-lg shadow-cyan-300/30 p-3">
+    <div class="container mx-auto flex items-center justify-between">
+        <!-- Logo -->
+        <a href="/" class="text-white text-lg font-bold">
+            <img src="/resources/img/Picture1.png" alt="logo" class="h-14">
+        </a>
+        <!-- Navigation Links (Desktop) -->
+        <div class="hidden md:flex space-x-6">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/" class="nav-link">About Us</a>
+            <a href="event" class="nav-link">Event</a>
+            <a href="contact" class="nav-link">Contact</a>
+        </div>
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden">
+            <button id="menu-button" class="toggle-btn text-white focus:outline-none relative">
+                <svg class="w-8 h-8 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden flex flex-col mt-4 space-y-4 md:hidden items-center transition-all duration-300 ease-in-out transform scale-95 opacity-0 w-full">
+        <a href="/" class="nav-link w-full text-center">Home</a>
+        <a href="/" class="nav-link w-full text-center">About Us</a>
+        <a href="event" class="nav-link w-full text-center">Event</a>
+        <a href="contact" class="nav-link w-full text-center">Contact</a>
+    </div>
+</nav>
+
+<!-- JavaScript untuk Toggle Mobile Menu -->
+<script>
+    const menuButton = document.getElementById('menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuButton.addEventListener('click', () => {
+        menuButton.classList.add('clicked'); // Efek Zoom In saat diklik
+        setTimeout(() => menuButton.classList.remove('clicked'), 200); // Reset efek setelah 200ms
+
+        if (mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.remove('hidden');
+            setTimeout(() => {
+                mobileMenu.classList.remove('scale-95', 'opacity-0');
+                mobileMenu.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        } else {
+            mobileMenu.classList.remove('scale-100', 'opacity-100');
+            mobileMenu.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                mobileMenu.classList.add('hidden');
+            }, 300);
+        }
+    });
+</script>
+
+<!-- Tailwind Custom Style -->
+<style>
+/* Tombol Navbar */
+.nav-link {
+    position: relative;
+    padding: 10px 15px;
+    color: white;
+    font-weight: 500;
+    transition: all 0.3s ease-in-out;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Efek Glow saat Hover */
+.nav-link::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(0, 255, 255, 0.2) 10%, transparent 50%);
+    transition: all 0.4s ease-in-out;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.nav-link:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.nav-link:hover {
+    color: cyan;
+    text-shadow: 0 0 10px cyan;
+}
+
+/* Efek Hover di Mobile: Lebar Penuh */
+@media (max-width: 768px) {
+    .nav-link {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 12px 0;
+    }
+
+    .nav-link:hover {
+        background-color: rgba(0, 255, 255, 0.2);
+    }
+}
+
+/* Animasi Tombol Toggle */
+.toggle-btn {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+/* Hover: Efek Glow & Berdenyut */
+.toggle-btn:hover {
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+    animation: pulse 1.2s infinite;
+}
+
+/* Klik: Efek Zoom */
+.toggle-btn.clicked {
+    transform: scale(1.2);
+}
+
+/* Animasi Pulse */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+</style>
